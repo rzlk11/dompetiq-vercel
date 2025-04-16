@@ -43,7 +43,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie: { secure: "auto" },
+    cookie: { secure: "auto", sameSite: "none" },
   })
 );
 
