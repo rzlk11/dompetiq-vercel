@@ -35,11 +35,14 @@ export const getTransactions = async (req, res) => {
     const include = [
       {
         model: Users,
-        attributes: [],
+        attributes: [["username", "user"]],
       },
       {
         model: Categories,
-        attributes: [],
+        attributes: [
+          ["name", "category"],
+          ["type", "category_type"],
+        ],
         where: {},
       },
     ];
@@ -70,9 +73,6 @@ export const getTransactions = async (req, res) => {
           ),
           "createdAt", // Alias untuk kolom yang diformat
         ],
-        [Sequelize.literal("user.username"), "user"],
-        [Sequelize.literal("category.name"), "category"],
-        [Sequelize.literal("category.type"), "category_type"],
       ],
       include,
       raw: true,
@@ -93,9 +93,19 @@ export const getTransactionById = async (req, res) => {
         "uuid",
         "amount",
         "is_scheduled",
-        [Sequelize.literal("user.username"), "user"],
-        [Sequelize.literal("category.name"), "category"],
-        [Sequelize.literal("category.type"), "type"],
+      ],
+      include: [
+        {
+          model: Users,
+          attributes: [["username", "user"]],
+        },
+        {
+          model: Categories,
+          attributes: [
+            ["name", "category"],
+            ["type", "type"],
+          ],
+        },
       ],
     });
     res.status(200).json(response);
