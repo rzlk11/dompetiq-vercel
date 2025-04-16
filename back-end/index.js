@@ -35,6 +35,8 @@ app.use(
   })
 );
 
+app.options('*', cors()); // respond to all OPTIONS preflight requests
+
 app.use(express.json());
 
 app.use(
