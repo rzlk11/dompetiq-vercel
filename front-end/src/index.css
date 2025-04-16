@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
+
+@import "tailwindcss";
+
+body{background:#f1f1f1;}
+
+
+/* Untuk browser Webkit (Chrome, Safari) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+  }
+  
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    display: none;
+  }
+  
+  input[type="date"] {
+    position: relative;
+    padding-right: 2.5rem;
+  }
+  
+  /* Untuk Firefox */
+  input[type="date"] {
+    -moz-appearance: textfield;
+  }

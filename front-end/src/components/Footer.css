@@ -1,0 +1,62 @@
+.footer {
+    background-color: #4CAF50; /* Warna hijau sesuai gambar */
+    color: white;
+    padding: 20px 40px;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-logo .logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .footer-menu {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-menu li {
+    margin: 5px 0;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-social img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .footer-bottom img {
+    width: 60px;
+    height: auto;
+  }

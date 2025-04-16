@@ -1,0 +1,166 @@
+//Test API
+
+// Create user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "username": "John Doe",
+    "email": "johndoe@gmail.com",
+    "password": "12345677",
+    "confPassword": "12345677"
+}
+
+
+###
+// Get all users
+GET http://localhost:5000/users
+
+
+###
+// Get user by id
+GET http://localhost:5000/users/b676847c-0817-4d42-bef0-e6cae6b17bda
+
+
+###
+// update user
+PATCH http://localhost:5000/users/39c186c5-570e-4c2d-b3c4-947d1669b3b4
+Content-Type: application/json
+
+{
+    "username": "John Doe 2",
+    "email": "johndoe@gmail.com",
+    "password": "",
+    "confPassword": ""
+}
+
+###
+// delete user
+DELETE http://localhost:5000/users/39c186c5-570e-4c2d-b3c4-947d1669b3b4
+
+###
+//login
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "rizalk@gmail.com",
+    "password" : "12345677"
+}
+
+###
+//login
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "PambudiWJ@gmail.com",
+    "password" : "112233"
+}
+
+###
+// me
+GET http://localhost:5000/me
+
+###
+// get user by id
+GET http://localhost:5000/users/e0bdf03d-598c-4821-b197-61d4a332f111
+
+###
+//logout
+DELETE http://localhost:5000/logout
+
+###
+//get budgets
+GET http://localhost:5000/budgets
+
+
+###
+//create budget
+POST http://localhost:5000/budgets
+Content-Type: application/json
+
+{
+    "period": "weekly",
+    "amount": 500000,
+    "start_date": "2025-03-26",
+    "end_date": "2025-03-27",
+    "categoryId": 2
+}
+
+###
+//get budget by id
+GET http://localhost:5000/budgets/5eef6744-da5e-4c5b-a435-d4958e1b6884
+
+###
+//update budget
+PATCH http://localhost:5000/budgets/f1b8d6e9-3fbc-4e99-9d37-7bf51c447006
+Content-Type: application/json
+
+{
+    "period": "weekly",
+    "amount": 300000,
+    "start_date": "2025-03-26",
+    "end_date": "2025-03-27"
+}
+
+###
+GET http://localhost:5000/dashboard/monthly-comparison
+//otp request
+POST http://localhost:5000/request-otp
+Content-Type: application/json
+
+{
+    "email": "rizalharyo14@gmail.com",
+    "subject": "Email Verification",
+    "message": "Verify your email with the code below",
+    "duration": 1
+}
+
+###
+//email verification request
+POST http://localhost:5000/email-verification
+Content-Type: application/json
+
+{
+    "email": "rizalharyo14@gmail.com"
+}
+
+###
+//email verification otp verification
+POST http://localhost:5000/verify-email-verification-otp
+Content-Type: application/json
+
+{
+    "email": "rizalharyo14@gmail.com",
+    "otp": "9400"
+}
+
+###
+//forgot password
+POST http://localhost:5000/forgot-password
+Content-Type: application/json
+
+{
+    "email": "rizalharyo14@gmail.com"
+}
+
+###
+//otp verify
+POST http://localhost:5000/verify-otp
+Content-Type: application/json
+
+{
+    "email": "rizalharyo14@gmail.com",
+    "otp": "2586"
+}
+
+###
+//reset password
+POST http://localhost:5000/reset-password
+Content-Type: application/json
+
+{
+    "email": "rizalharyo14@gmail.com",
+    "newPassword": "rizal123"
+}
