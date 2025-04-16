@@ -73,13 +73,16 @@ export const getMonthlySummary = async (req, res) => {
     // Ambil jumlah transaksi per bulan untuk user yang sedang login
     const summary = await Transactions.findAll({
       attributes: [
-        [Sequelize.fn("MONTH", Sequelize.col("createdAt")), "month"],
+        [
+          Sequelize.fn("TO_CHAR", Sequelize.col("createdAt"), "YYYY-MM"),
+          "month",
+        ],
         [Sequelize.fn("COUNT", Sequelize.col("id")), "count"],
       ],
       where: {
         userId: req.userId,
       },
-      group: [Sequelize.fn("MONTH", Sequelize.col("createdAt"))],
+      group: [Sequelize.fn("TO_CHAR", Sequelize.col("createdAt"), "YYYY-MM")],
       raw: true,
     });
 
