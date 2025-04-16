@@ -110,7 +110,8 @@ export const getMonthlySummary = async (req, res) => {
 
     // Isi bulan-bulan yang ada datanya dari query
     summary.forEach((item) => {
-      const monthIndex = item.month - 1;
+      const monthPart = item.month.split("-")[1]; // e.g. "04"
+      const monthIndex = parseInt(monthPart, 10) - 1;
       formatted[monthNames[monthIndex]] = parseInt(item.count);
     });
 
