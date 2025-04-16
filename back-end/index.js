@@ -34,7 +34,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options('*', cors(corsOptions)); // 👈 make sure options use the same config
 
 app.use(express.json());
 
