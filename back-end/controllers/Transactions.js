@@ -90,18 +90,18 @@ export const getTransactionById = async (req, res) => {
         "uuid",
         "amount",
         "is_scheduled",
+        [Sequelize.literal('"user"."username"'), "user"],
+        [Sequelize.literal('"category"."name"'), "category"],
+        [Sequelize.literal('"category"."type"'), "category_type"],
       ],
       include: [
         {
           model: Users,
-          attributes: [["username", "user"]],
+          attributes: [],
         },
         {
           model: Categories,
-          attributes: [
-            ["name", "category"],
-            ["type", "type"],
-          ],
+          attributes: [],
         },
       ],
     });
