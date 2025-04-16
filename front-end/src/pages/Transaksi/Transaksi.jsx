@@ -73,7 +73,7 @@ const Transaksi = () => {
           transaction => transaction.category?.toLowerCase() === filters.category.toLowerCase()
         );
       }
-
+      console.log(filteredData);
       setTransactions(filteredData);
       setError(null);
     } catch (err) {
