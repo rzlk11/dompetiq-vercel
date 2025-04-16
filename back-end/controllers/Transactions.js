@@ -35,11 +35,11 @@ export const getTransactions = async (req, res) => {
     const include = [
       {
         model: Users,
-        attributes: [["username", "user"]],
+        attributes: [],
       },
       {
         model: Categories,
-        attributes: [["name", "category"], ["type", "type"]],
+        attributes: [],
         where: {},
       },
     ];
