@@ -146,7 +146,7 @@ const Dashboard = () => {
         name: monthMap[month] || month,
         value: value
       }));
-
+      console.log(formatted);
       setMonthlySummary(formatted);
     } catch (error) {
       console.error("Error fetching monthly summary:", error);
