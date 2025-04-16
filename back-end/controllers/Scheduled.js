@@ -35,11 +35,14 @@ export const getScheduled = async (req, res) => {
     const include = [
       {
         model: Users,
-        attributes: [],
+        attributes: [["username", "user"]],
       },
       {
         model: Categories,
-        attributes: [],
+        attributes: [
+          ["name", "category"],
+          ["type", "category_type"],
+        ],
         where: {},
       },
     ];
@@ -70,8 +73,6 @@ export const getScheduled = async (req, res) => {
         "start_date",
         "end_date",
         "description",
-        [Sequelize.literal("user.username"), "user"],
-        [Sequelize.literal("category.name"), "category"],
       ],
       include,
       raw: true,
@@ -97,17 +98,15 @@ export const getScheduledById = async (req, res) => {
         "start_date",
         "end_date",
         "description",
-        [Sequelize.literal("user.username"), "user"],
-        [Sequelize.literal("category.name"), "category"],
       ],
       include: [
         {
           model: Users,
-          attributes: [],
+          attributes: [["username", "user"]],
         },
         {
           model: Categories,
-          attributes: [],
+          attributes: [["category_name", "category"]],
         },
       ],
       raw: true,

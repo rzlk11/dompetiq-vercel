@@ -67,9 +67,9 @@ export const getTransactions = async (req, res) => {
         "is_scheduled",
         [
           Sequelize.fn(
-            "DATE_FORMAT",
+            "TO_CHAR",
             Sequelize.col("transactions.createdAt"),
-            "%Y-%m-%d %H:%i:%s"
+            "YYYY-MM-DD HH24:MI:SS"
           ),
           "createdAt", // Alias untuk kolom yang diformat
         ],
