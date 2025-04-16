@@ -156,8 +156,8 @@ function Anggaran() {
 
   const fetchBudgets = async () => {
     try {
-      const weekly = await axios.get('http://localhost:5000/budgets/period/weekly');
-      const monthly = await axios.get('http://localhost:5000/budgets/period/monthly');
+      const weekly = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/budgets/period/weekly`);
+      const monthly = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/budgets/period/monthly`);
       setWeeklyBudgets(weekly.data);
       setMonthlyBudgets(monthly.data);
     } catch (error) {
@@ -167,7 +167,7 @@ function Anggaran() {
 
   const fetchCategories = async () => {
     try {
-      const categories = await axios.get('http://localhost:5000/category');
+      const categories = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/category`);
       setCategoryData(categories.data);
     } catch (error) {
       console.error(error.message);
@@ -344,7 +344,7 @@ function Anggaran() {
       }
   
       // Send the updated data to the backend
-      await axios.patch(`http://localhost:5000/budgets/${budgetId}`, {
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/budgets/${budgetId}`, {
         amount: formValues.total,
         category_id: formValues.category.id,
       });
@@ -363,7 +363,7 @@ function Anggaran() {
     setMonthlyBudgets((prev) => prev.filter((budget) => budget.uuid !== budgetId));
   
     try {
-      await axios.delete(`http://localhost:5000/budgets/${budgetId}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/budgets/${budgetId}`);
       setShowDeleteModal(false);
       setDeletingBudget(null);
       fetchBudgets();

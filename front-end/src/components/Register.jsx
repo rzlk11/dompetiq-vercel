@@ -17,7 +17,7 @@ const Register = () => {
     e.preventDefault();
     // Handle registration logic here
     try {
-      await axios.post("http://localhost:5000/users", {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users`, {
         username: username,
         email: email,
         password: password,

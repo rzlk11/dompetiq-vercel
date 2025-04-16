@@ -67,7 +67,7 @@ const BudgetForm = () => {
 
   const fetchCategories = async () => {
     try {
-      const categories = await axios.get("http://localhost:5000/category");
+      const categories = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/category`);
       setCategoryData(categories.data);
     } catch (error) {
       console.error(error.message);
@@ -191,7 +191,7 @@ const BudgetForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/budgets", {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/budgets`, {
         amount: formData.amount,
         categoryId: formData.category.id,
         period: formData.period,

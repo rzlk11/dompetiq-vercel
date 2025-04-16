@@ -44,7 +44,7 @@ const KelolaKategori = () => {
   // Fetch categories dari backend
   const fetchCategories = async (type) => {
     try {
-      const response = await axios.get(`http://localhost:5000/category`, {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/category`, {
         params: { type },
         headers: {
           Authorization: `Bearer ${token}`
@@ -104,7 +104,7 @@ const KelolaKategori = () => {
     if (!newCategoryName.trim()) return;
     try {
       const type = activeTab === "pemasukan" ? "income" : "expense";
-      await axios.post(`http://localhost:5000/category`, 
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/category`, 
         { name: newCategoryName, type },
         {
           headers: {
@@ -123,7 +123,7 @@ const KelolaKategori = () => {
   // Handle update category
   const handleUpdateCategory = async (uuid, newName) => {
     try {
-      await axios.patch(`http://localhost:5000/category/${uuid}`, 
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/category/${uuid}`, 
         { name: newName },
         {
           headers: {
@@ -141,7 +141,7 @@ const KelolaKategori = () => {
   // Handle delete category
   const handleDeleteCategory = async (uuid) => {
     try {
-      await axios.delete(`http://localhost:5000/category/${uuid}`, {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/category/${uuid}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

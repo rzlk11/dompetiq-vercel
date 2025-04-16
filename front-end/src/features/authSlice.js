@@ -14,7 +14,7 @@ export const LoginUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/login",
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
         {
           email: user.email,
           password: user.password,
@@ -35,7 +35,7 @@ export const LoginUser = createAsyncThunk(
 
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
   try {
-    const response = await axios.get("http://localhost:5000/me", {
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/me`, {
       withCredentials: true,
     });
     return response.data;
@@ -48,7 +48,7 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 });
 
 export const LogOut = createAsyncThunk("user/LogOut", async () => {
-  await axios.delete("http://localhost:5000/logout", {
+  await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/logout`, {
     withCredentials: true,
   });
 });

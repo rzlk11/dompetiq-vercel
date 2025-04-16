@@ -16,7 +16,7 @@ const Kalender = () => {
 
   const fetchTransactions = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/transactions', {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/transactions`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -29,7 +29,7 @@ const Kalender = () => {
 
   const fetchScheduledEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/scheduled', {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/scheduled`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

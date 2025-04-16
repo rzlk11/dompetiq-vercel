@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   const getIncome = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/dashboard/income-total", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/income-total`, {
         withCredentials: true,
       });
       setIncome(response.data.incomeTotal);
@@ -78,7 +78,7 @@ const Dashboard = () => {
 
   const getExpense = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/dashboard/expense-total", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/expense-total`, {
         withCredentials: true,
       });
       setExpense(response.data.expenseTotal);
@@ -89,7 +89,7 @@ const Dashboard = () => {
 
   const getBalance = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/dashboard/balance", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/balance`, {
         withCredentials: true,
       });
       setBalance(response.data.balance);
@@ -100,7 +100,7 @@ const Dashboard = () => {
 
   const fetchRecentActivities = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/dashboard/recent-activity", {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/recent-activity`, {
         withCredentials: true,
       });
       setActivities(res.data);
@@ -111,7 +111,7 @@ const Dashboard = () => {
 
   const fetchMonthlyComparison = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/dashboard/monthly-comparison", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/monthly-comparison`, {
         withCredentials: true,
       });
   
@@ -124,7 +124,7 @@ const Dashboard = () => {
 
   const fetchTransactionHistory = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/dashboard/transaction-history", {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/transaction-history`, {
         withCredentials: true,
       });
       setTransactions(res.data);
@@ -135,7 +135,7 @@ const Dashboard = () => {
 
   const fetchMonthlySummary = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/dashboard/monthly-summary", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/monthly-summary`, {
         withCredentials: true,
       });
 
@@ -155,7 +155,7 @@ const Dashboard = () => {
 
   const fetchBudgets = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/dashboard/budgets", {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/budgets`, {
         withCredentials: true,
       });
       setBudgets(res.data);

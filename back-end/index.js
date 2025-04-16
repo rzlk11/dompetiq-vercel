@@ -1,5 +1,5 @@
-import express from "express";
 import dotenv from "dotenv";
+import express from "express";
 import cors from "cors";
 import session from "express-session";
 import db from "./config/Database.js";
@@ -30,7 +30,7 @@ const store = new sessionStore({
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONT_END_URL,
     credentials: true,
   })
 );

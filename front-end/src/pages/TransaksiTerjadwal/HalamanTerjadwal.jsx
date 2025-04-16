@@ -63,7 +63,7 @@ const HalamanTerjadwal = () => {
       // Bersihkan parameter undefined
       Object.keys(params).forEach(key => params[key] === undefined && delete params[key]);
 
-      const response = await axios.get("http://localhost:5000/scheduled", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/scheduled`, {
         params,
         headers: {
           Authorization: `Bearer ${token}`
@@ -85,7 +85,7 @@ const HalamanTerjadwal = () => {
     try {
       const params = {};
       if (type) params.type = type;
-      const response = await axios.get("http://localhost:5000/category", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/category`, {
         params,
         headers: {
           Authorization: `Bearer ${token}`
@@ -126,7 +126,7 @@ const HalamanTerjadwal = () => {
         type: isIncome ? 'income' : 'expense'
       };
 
-      await axios.post("http://localhost:5000/scheduled", transactionData, {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/scheduled`, transactionData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -154,7 +154,7 @@ const HalamanTerjadwal = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/scheduled/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/scheduled/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -170,7 +170,7 @@ const HalamanTerjadwal = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        `http://localhost:5000/scheduled/${editingTransaction.uuid}`,
+        `${import.meta.env.VITE_BACKEND_URL}/scheduled/${editingTransaction.uuid}`,
         {
           amount: editingTransaction.amount,
           type: editingTransaction.type,

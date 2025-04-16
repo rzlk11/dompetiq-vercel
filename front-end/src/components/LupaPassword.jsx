@@ -25,7 +25,7 @@ const LupaPassword = () => {
 
   const sendPasswordOTP = async () => {
     try {
-      await axios.post("http://localhost:5000/forgot-password", {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/forgot-password`, {
         email,
       });
       setIsSubmitEmailError(false);
@@ -41,7 +41,7 @@ const LupaPassword = () => {
 
   const verifyOTP = async () => {
     try {
-      await axios.post("http://localhost:5000/verify-otp", {
+      await axios.post("${import.meta.env.VITE_BACKEND_URL}/verify-otp", {
         email: email,
         otp: otp.join('')
       });
@@ -58,7 +58,7 @@ const LupaPassword = () => {
 
   const newPasswordUpdate = async ({ email }) => {
     try {
-      await axios.post("http://localhost:5000/reset-password", {
+      await axios.post("${import.meta.env.VITE_BACKEND_URL}/reset-password", {
         email,
         newPassword: newPassword
       });
