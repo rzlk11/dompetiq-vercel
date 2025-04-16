@@ -41,7 +41,7 @@ export const getScheduled = async (req, res) => {
         model: Categories,
         attributes: [
           ["name", "category"],
-          ["type", "category_type"],
+          ["type", "type"],
         ],
         where: {},
       },

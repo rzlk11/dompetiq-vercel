@@ -39,7 +39,7 @@ export const getTransactions = async (req, res) => {
       },
       {
         model: Categories,
-        attributes: [["name", "category"], ["type"]],
+        attributes: [["name", "category"], ["type", "type"]],
         where: {},
       },
     ];
