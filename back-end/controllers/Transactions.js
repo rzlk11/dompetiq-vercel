@@ -70,6 +70,9 @@ export const getTransactions = async (req, res) => {
           ),
           "createdAt", // Alias untuk kolom yang diformat
         ],
+        [Sequelize.literal('"user"."username"'), "user"],
+        [Sequelize.literal('"category"."name"'), "category"],
+        [Sequelize.literal('"category"."type"'), "category_type"],
       ],
       include,
       raw: true,
