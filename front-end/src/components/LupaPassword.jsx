@@ -41,7 +41,7 @@ const LupaPassword = () => {
 
   const verifyOTP = async () => {
     try {
-      await axios.post("${import.meta.env.VITE_BACKEND_URL}/verify-otp", {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/verify-otp`, {
         email: email,
         otp: otp.join('')
       });
