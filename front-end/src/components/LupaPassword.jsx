@@ -58,7 +58,7 @@ const LupaPassword = () => {
 
   const newPasswordUpdate = async ({ email }) => {
     try {
-      await axios.post("${import.meta.env.VITE_BACKEND_URL}/reset-password", {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/reset-password`, {
         email,
         newPassword: newPassword
       });
