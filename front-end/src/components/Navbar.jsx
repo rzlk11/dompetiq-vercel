@@ -4,7 +4,6 @@ import { LogOut, reset } from '../features/authSlice';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
@@ -159,48 +158,6 @@ const Navbar = ({ isSidebarOpen, toggleSidebar }) => {
           </button>
         </div>
         
-        {/* Notification button */}
-        <div className="relative" ref={notificationsRef}>
-          <button 
-            className="p-2 rounded-full hover:bg-gray-100"
-            onClick={handleNotificationsClick}
-          >
-            <NotificationsIcon fontSize="small" />
-          </button>
-          
-          {/* Notifications dropdown */}
-          {showNotifications && (
-            <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-10">
-              <div className="p-4 border-b">
-                <h3 className="font-medium">Notifications</h3>
-              </div>
-              <div className="max-h-96 overflow-y-auto">
-                <div className="p-4 border-b hover:bg-gray-50">
-                  <p className="text-sm font-medium">Update Baru tersedia</p>
-                  <p className="text-xs text-gray-500">2 hours ago</p>
-                </div>
-                <div className="p-4 border-b hover:bg-gray-50">
-                  <p className="text-sm font-medium">Laporan anda sudah siap</p>
-                  <p className="text-xs text-gray-500">1 day ago</p>
-                </div>
-              </div>
-              <div className="p-2 text-center">
-                <button className="text-sm text-green-500 hover:text-green-700">
-                  View all notifications
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-        
-        {/* Help button */}
-        <button 
-          className="p-2 rounded-full hover:bg-gray-100"
-          onClick={() => navigate('/help')}
-        >
-          <HelpOutlineIcon fontSize="small" />
-        </button>
-        
         {/* User profile button */}
         <div className="relative" ref={profileMenuRef}>
           <button 
@@ -218,18 +175,6 @@ const Navbar = ({ isSidebarOpen, toggleSidebar }) => {
                 <p className="text-sm text-gray-500">{user.email}</p>
               </div>
               <div>
-                <button 
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-50"
-                  onClick={() => navigate('/profile')}
-                >
-                  Profile
-                </button>
-                <button 
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-50"
-                  onClick={() => navigate('/pengaturan')}
-                >
-                  Settings
-                </button>
                 <button 
                   className="block w-full text-left px-4 py-2 hover:bg-gray-50"
                   onClick={handleLogout}

@@ -49,8 +49,6 @@ const Dashboard = () => {
   const [tempTransactionItemCount, setTempTransactionItemCount] = useState(5);
   const [tempBudgetItemCount, setTempBudgetItemCount] = useState(5);
   const [tempAccountItemCount, setTempAccountItemCount] = useState(5);
-  const userId = user?.email; // atau user?.id tergantung dari backend-mu
-  console.log("userId:", userId); // untuk debugging
   
   
   useEffect(()=>{
