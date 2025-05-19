@@ -13,7 +13,7 @@ export const getIncomeTotal = async (req, res) => {
     });
     res.json({ incomeTotal: incomeTotal || 0 });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -27,7 +27,7 @@ export const getExpenseTotal = async (req, res) => {
     });
     res.json({ expenseTotal: expenseTotal || 0 });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -50,7 +50,7 @@ export const getBalance = async (req, res) => {
     const balance = (income || 0) - (expense || 0);
     res.json({ balance });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -64,7 +64,7 @@ export const getRecentActivities = async (req, res) => {
     });
     res.json(activities);
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -118,7 +118,7 @@ export const getMonthlySummary = async (req, res) => {
     res.json(formatted);
   } catch (error) {
     console.error("Monthly Summary Error:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -132,7 +132,7 @@ export const getTransactionHistory = async (req, res) => {
     });
     res.json(transactions);
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -170,7 +170,7 @@ export const getMonthlyComparison = async (req, res) => {
     });
   } catch (error) {
     console.error("Error in getMonthlyComparison:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -182,6 +182,6 @@ export const getBudgets = async (req, res) => {
     });
     res.json(budgets);
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
