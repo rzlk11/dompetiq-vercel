@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 import Users from "./UserModel.js";
 import Categories from "./CategoryModel.js";
+import Rekening from "./RekeningModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -41,5 +42,7 @@ Users.hasMany(Transactions);
 Transactions.belongsTo(Users);
 Categories.hasMany(Transactions);
 Transactions.belongsTo(Categories);
+Rekening.hasMany(Transactions);
+Transactions.belongsTo(Rekening);
 
 export default Transactions;

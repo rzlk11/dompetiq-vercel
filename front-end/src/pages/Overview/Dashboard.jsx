@@ -5,6 +5,7 @@ import {
   AttachMoney, 
   Work, 
   AccountBalanceWallet,
+  AccountBalance,
   Close 
 } from '@mui/icons-material';
 import { 
@@ -36,14 +37,18 @@ const Dashboard = () => {
   const [currentMonthCount, setCurrentMonthCount] = useState(0);
   const [lastMonthCount, setLastMonthCount] = useState(0);
   const [budgets, setBudgets] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   
   // State for popups and item counts
   const [transactionDialogOpen, setTransactionDialogOpen] = useState(false);
   const [budgetDialogOpen, setBudgetDialogOpen] = useState(false);
+  const [accountDialogOpen, setAccountDialogOpen] = useState(false);
   const [transactionItemCount, setTransactionItemCount] = useState(5);
   const [budgetItemCount, setBudgetItemCount] = useState(5);
+  const [accountItemCount, setAccountItemCount] = useState(5);
   const [tempTransactionItemCount, setTempTransactionItemCount] = useState(5);
   const [tempBudgetItemCount, setTempBudgetItemCount] = useState(5);
+  const [tempAccountItemCount, setTempAccountItemCount] = useState(5);
   const userId = user?.email; // atau user?.id tergantung dari backend-mu
   console.log("userId:", userId); // untuk debugging
   
@@ -58,6 +63,7 @@ const Dashboard = () => {
     fetchTransactionHistory();
     fetchMonthlyComparison();
     fetchBudgets();
+    fetchAccounts();
   }, [dispatch]);
 
 
@@ -146,6 +152,7 @@ const Dashboard = () => {
         name: monthMap[month] || month,
         value: value
       }));
+
       setMonthlySummary(formatted);
     } catch (error) {
       console.error("Error fetching monthly summary:", error);
@@ -160,6 +167,29 @@ const Dashboard = () => {
       setBudgets(res.data);
     } catch (err) {
       console.error("Error fetching budgets:", err);
+    }
+  };
+
+  // Function to fetch accounts
+  const fetchAccounts = async () => {
+    try {
+      // Replace with your actual endpoint
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/transactions`, {
+        withCredentials: true,
+        params: { grouped: true }
+      });
+      setAccounts(res.data || [
+        // Fallback data (should be removed in production)
+        { id: 1, name: "Rekening Bank", balance: 122000500, type: "Tabungan" },
+        { id: 2, name: "Gopay", balance: -65000, type: "Tabungan" }
+      ]);
+    } catch (err) {
+      console.error("Error fetching accounts:", err);
+      // Set fallback data for demo
+      setAccounts([
+        { id: 1, name: "Rekening Bank", balance: 122000500, type: "Tabungan" },
+        { id: 2, name: "Gopay", balance: -65000, type: "Tabungan" }
+      ]);
     }
   };
 
@@ -215,6 +245,21 @@ const Dashboard = () => {
     setBudgetDialogOpen(false);
   };
 
+  // Handler for account dialog
+  const handleAccountDialogOpen = () => {
+    setTempAccountItemCount(accountItemCount);
+    setAccountDialogOpen(true);
+  };
+
+  const handleAccountDialogClose = () => {
+    setAccountDialogOpen(false);
+  };
+
+  const handleAccountSave = () => {
+    setAccountItemCount(tempAccountItemCount);
+    setAccountDialogOpen(false);
+  };
+
   // Get limited transactions based on selected count
   const getLimitedTransactions = () => {
     return transactions.slice(0, transactionItemCount);
@@ -223,6 +268,11 @@ const Dashboard = () => {
   // Get limited budgets based on selected count
   const getLimitedBudgets = () => {
     return budgets.slice(0, budgetItemCount);
+  };
+
+  // Get limited accounts based on selected count
+  const getLimitedAccounts = () => {
+    return accounts.slice(0, accountItemCount);
   };
 
   const total = 100;
@@ -292,6 +342,68 @@ const Dashboard = () => {
               </ResponsiveContainer>
             </div>
           </div>
+
+          {/* Accounts Section */}
+          <div className="bg-white rounded-lg p-4 mb-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="font-bold">Rekening</h2>
+              <MoreVert 
+                fontSize="small" 
+                onClick={handleAccountDialogOpen} 
+                style={{ cursor: 'pointer' }} 
+              />
+            </div>
+            <div className="space-y-4">
+              {getLimitedAccounts().map((account) => (
+                <div className="flex items-center justify-between border-b pb-2">
+                  <div className="flex items-center">
+                    <div className="bg-gray-200 p-2 rounded-full mr-3">
+                      <AccountBalance fontSize="small" style={{ color: 'black' }} />
+                    </div>
+                    <div>
+                      <div className="font-medium">{account.rekening}</div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-medium">Rp {account.finalBalance.toLocaleString()}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Account Dialog */}
+          <Dialog
+            open={accountDialogOpen}
+            onClose={handleAccountDialogClose}
+            fullWidth
+            maxWidth="xs"
+          >
+            <DialogTitle>REKENING</DialogTitle>
+            <DialogContent>
+              <FormControl fullWidth margin="normal">
+                <InputLabel>Jumlah Rekening Yang Ditampilkan</InputLabel>
+                <Select
+                  value={tempAccountItemCount}
+                  label="Jumlah Rekening Yang Ditampilkan"
+                  onChange={(e) => setTempAccountItemCount(e.target.value)}
+                >
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={10}>10</MenuItem>
+                  <MenuItem value={15}>15</MenuItem>
+                  <MenuItem value={20}>20</MenuItem>
+                </Select>
+              </FormControl>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleAccountDialogClose} color="primary">
+                BATAL
+              </Button>
+              <Button onClick={handleAccountSave} color="primary">
+                SIMPAN
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           {/* Transaction History */}
           <div className="bg-white rounded-lg p-4">
