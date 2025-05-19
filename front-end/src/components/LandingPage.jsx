@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import { Menu, X } from 'lucide-react';
 import Footer from "./Footer"; 
 import logo from "../assets/logo.png";
 import logoIDX from "../assets/logo-IDX.png";
@@ -20,6 +21,16 @@ const scrollToSection = (id) => {
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleMobileNavClick = (id) => {
+    scrollToSection(id);
+    setIsMenuOpen(false); // Close menu after clicking a navigation item
+  };
 
   const handleSubscribeClick = (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -62,7 +73,48 @@ const LandingPage = () => {
               Daftar
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden flex items-center"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6 text-green-600" />
+            ) : (
+              <Menu className="h-6 w-6 text-green-600" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white py-4 px-6 shadow-lg">
+            <nav className="flex flex-col space-y-4">
+              <button onClick={() => handleMobileNavClick("Home")} className="text-left py-2 px-4 hover:bg-green-50 hover:text-green-500 rounded-lg">
+                Home
+              </button>
+              <button onClick={() => handleMobileNavClick("Tentang")} className="text-left py-2 px-4 hover:bg-green-50 hover:text-green-500 rounded-lg">
+                Tentang
+              </button>
+              <button onClick={() => handleMobileNavClick("Fitur")} className="text-left py-2 px-4 hover:bg-green-50 hover:text-green-500 rounded-lg">
+                Fitur
+              </button>
+              <button onClick={() => handleMobileNavClick("Tangkapan-Layar")} className="text-left py-2 px-4 hover:bg-green-50 hover:text-green-500 rounded-lg">
+                Tangkapan Layar
+              </button>
+              <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
+                <Link to="/login" className="py-2 px-4 text-center text-white bg-green-500 rounded-lg">
+                  Masuk
+                </Link>
+                <Link to="/Register" className="py-2 px-4 text-center text-green-500 border border-green-500 rounded-lg">
+                  Daftar
+                </Link>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
