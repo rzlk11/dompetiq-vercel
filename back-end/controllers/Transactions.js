@@ -78,9 +78,9 @@ export const getTransactions = async (req, res) => {
           "rekeningId",
           [
             Sequelize.fn(
-              "DATE_FORMAT",
+              "TO_CHAR",
               Sequelize.col("transactions.createdAt"),
-              "%Y-%m-%d %H:%i:%s"
+              "YYYY-MM"
             ),
             "createdAt",
           ],
