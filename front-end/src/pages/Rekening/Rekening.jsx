@@ -232,7 +232,7 @@ export default function Rekening() {
     
     try {
       await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/rekening/${editAccount.rekening_uuid}`,
+        `${import.meta.env.VITE_BACKEND_URL}/rekening/${editAccount.uuid}`,
         {
           name: editAccount.name,
           balance: parseFloat(editAccount.balance || 0),
@@ -254,7 +254,7 @@ export default function Rekening() {
     
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/${deleteAccount.rekening_uuid}`
+        `${import.meta.env.VITE_BACKEND_URL}/rekening/${deleteAccount.uuid}`
       );
       
       fetchAccounts();
