@@ -3,7 +3,7 @@ import axios from "axios";
 import { Plus, MoreVertical, X, ChevronDown } from "lucide-react";
 
 const formatCurrency = (amount) => {
-  return new Intl.NumberFormat("id-ID").format(Math.abs(amount));
+  return new Intl.NumberFormat("id-ID").format(amount);
 };
 
 const AccountCard = ({ account, onOpenMenu, menuOpen, onEdit, onDelete }) => {
