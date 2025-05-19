@@ -137,21 +137,11 @@ export const getTransactionHistory = async (req, res) => {
 };
 
 export const getMonthlyComparison = async (req, res) => {
-  console.log(req.userId);
   try {
     const now = new Date();
     const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
     const nextMonthStart = new Date(now.getFullYear(), now.getMonth() + 1, 1);
     const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-
-    console.log(
-      "Current Month Range:",
-      currentMonthStart,
-      "to",
-      nextMonthStart
-    );
-    console.log("Last Month Range:", lastMonthStart, "to", currentMonthStart);
-
     const [currentCount, lastCount] = await Promise.all([
       Transactions.count({
         where: {
