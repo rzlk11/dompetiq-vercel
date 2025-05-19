@@ -70,7 +70,15 @@ export const getTransactions = async (req, res) => {
     }
 
     if (grouped) {
-      const response = await Transactions.findAll({
+      // Step 1: Get all user accounts (Rekening)
+      const allAccounts = await Rekening.findAll({
+        where: { userId: req.userId },
+        attributes: ["id", "uuid", "name", "balance"],
+        raw: true,
+      });
+
+      // Step 2: Get all transactions matching filters
+      const transactions = await Transactions.findAll({
         where,
         attributes: [
           "amount",
@@ -93,9 +101,9 @@ export const getTransactions = async (req, res) => {
         raw: true,
       });
 
-      // Step 1: Group by rekeningId
+      // Step 3: Group transactions by rekeningId
       const grouped = {};
-      response.forEach((tx) => {
+      transactions.forEach((tx) => {
         const id = tx.rekeningId;
         if (!grouped[id]) {
           grouped[id] = {
@@ -109,32 +117,36 @@ export const getTransactions = async (req, res) => {
         grouped[id].transactions.push(tx);
       });
 
-      // Step 2: Sort & calculate running balance
-      for (const group of Object.values(grouped)) {
+      // Step 4: Merge allAccounts with grouped transactions
+      const result = allAccounts.map((acc) => {
+        const group = grouped[acc.id] || {
+          rekeningId: acc.id,
+          rekening_uuid: acc.uuid,
+          rekening: acc.name,
+          initialBalance: Number(acc.balance),
+          transactions: [],
+        };
+
         let balance = group.initialBalance;
+
         group.transactions.sort(
           (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
         );
-
         group.transactions = group.transactions.map((tx) => {
           const amount =
             tx.category_type === "expense"
               ? -Number(tx.amount)
               : Number(tx.amount);
           balance += amount;
-          return {
-            ...tx,
-            amount,
-            balance,
-          };
+          return { ...tx, amount, balance };
         });
 
         group.finalBalance = balance;
-      }
 
-      const result = Object.values(grouped);
+        return group;
+      });
 
-      res.status(200).json(result);
+      return res.status(200).json(result);
     } else {
       const response = await Transactions.findAll({
         where,
