@@ -246,10 +246,6 @@ const Sidebar = () => {
                   <CategoryIcon fontSize="small" />
                   <span className="ml-3">Pengelolaan Kategori</span>
                 </div>
-                <Link to="/pengaturan" className={`flex items-center px-4 py-2 ${isActive('/pengaturan') ? 'text-green-400 bg-gray-800' : 'text-gray-300'} hover:bg-gray-800 transition-colors duration-200`}>
-                  <SettingsIcon fontSize="small" />
-                  <span className="ml-3">Pengaturan</span>
-                </Link>
               </nav>
             </div>
           </div>

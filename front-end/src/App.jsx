@@ -19,6 +19,13 @@ import KelolaKategori from './pages/Kategori/KelolaKategori';
 
 import Kalender from './pages/Kalender/Kalender';
 
+import Rekening from './pages/Rekening/Rekening';
+
+import ExportPDF from './pages/Pdf/Export';
+
+import Kategori from './pages/Diagram/Kategori';
+import Waktu from './pages/Diagram/Waktu';
+
 
 
 function App() {
@@ -39,11 +46,21 @@ function App() {
         <Route path='/anggaran' element={<Anggaran />} />
         <Route path='/anggaran/tambah' element={<BudgetForm />} />
 
+        {/* Rute untuk Rekening */}
+        <Route path='/rekening' element={<Rekening />} />
+
         {/* {Rute untuk Kalender} */}
         <Route path='/kalender' element={<Kalender />} />
 
         {/* Rute untuk Kategori */}
         <Route path='/kategori/kelola' element={<KelolaKategori />} />
+
+        {/* Rute untuk diagram */}
+        <Route path='/diagram/kategori' element={<Kategori />} />
+        <Route path='/diagram/waktu' element={<Waktu />} />
+
+        {/* Rute untuk export PDF */}
+        <Route path='/export-pdf' element={<ExportPDF />} />
 
         {/* Rute untuk Pengaturan */}
         <Route path='/pengaturan' element={<Settings />} />
